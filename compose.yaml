@@ -30,3 +30,15 @@ services:
     volumes:
       - ./.volumes/redis/data:/data
     command: redis-server --requirepass secret
+  rabbitmq:
+    image: rabbitmq:management
+    container_name: rabbitmq
+    restart: always
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: rabbitmq
+      RABBITMQ_DEFAULT_PASS: secret
+    volumes:
+      - ./.volumes/rabbitmq:/var/lib/rabbitmq
