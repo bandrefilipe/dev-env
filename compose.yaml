@@ -42,3 +42,11 @@ services:
       RABBITMQ_DEFAULT_PASS: secret
     volumes:
       - ./.volumes/rabbitmq:/var/lib/rabbitmq
+  zookeeper:
+    image: confluentinc/cp-zookeeper
+    container_name: zookeeper
+    restart: always
+    ports:
+      - "2181:2181"
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
