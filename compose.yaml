@@ -74,3 +74,14 @@ services:
     environment:
       - xpack.security.enabled=false
       - discovery.type=single-node
+  kibana:
+    image: "kibana:${KIBANA_TAG:-8.6.0}"
+    container_name: kibana
+    depends_on:
+      - elasticsearch
+    restart: always
+    ports:
+      - "${KIBANA_PORT:-5601}:5601"
+    environment:
+      SERVER_NAME: dev-env
+      ELASTICSEARCH_HOSTS: http://elasticsearch:9200
