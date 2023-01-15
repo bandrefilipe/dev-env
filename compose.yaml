@@ -65,3 +65,12 @@ services:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+  elasticsearch:
+    image: "elasticsearch:${ELASTICSEARCH_TAG:-8.6.0}"
+    container_name: elasticsearch
+    restart: always
+    ports:
+      - "${ELASTICSEARCH_PORT:-9200}:9200"
+    environment:
+      - xpack.security.enabled=false
+      - discovery.type=single-node
