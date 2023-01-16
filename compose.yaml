@@ -65,6 +65,19 @@ services:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+  kafka-ui:
+    image: "provectuslabs/kafka-ui:${KAFKA_UI_TAG:-latest}"
+    container_name: kafka-ui
+    depends_on:
+      - zookeeper
+      - kafka
+    restart: always
+    ports:
+      - "${KAFKA_UI_PORT:-19092}:8080"
+    environment:
+      KAFKA_CLUSTERS_0_NAME: dev-env
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:9092
+      KAFKA_CLUSTERS_0_ZOOKEEPER: zookeeper:2181
   elasticsearch:
     image: "elasticsearch:${ELASTICSEARCH_TAG:-8.6.0}"
     container_name: elasticsearch
