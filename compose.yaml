@@ -8,7 +8,7 @@ services:
       - "${POSTGRES_PORT:-5432}:5432"
     environment:
       POSTGRES_USER: "${POSTGRES_USERNAME:-postgres}"
-      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD:-secret}"
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD:-postgres}"
     volumes:
       - ./.volumes/postgres/data:/var/lib/postgresql/data
   mongo:
@@ -19,7 +19,7 @@ services:
       - "${MONGO_PORT:-27017}:27017"
     environment:
       MONGO_INITDB_ROOT_USERNAME: "${MONGO_USERNAME:-mongo}"
-      MONGO_INITDB_ROOT_PASSWORD: "${MONGO_PASSWORD:-secret}"
+      MONGO_INITDB_ROOT_PASSWORD: "${MONGO_PASSWORD:-mongo}"
     volumes:
       - ./.volumes/mongo/db:/data/db
       - ./.volumes/mongo/configdb:/data/configdb
@@ -31,7 +31,7 @@ services:
       - "${REDIS_PORT:-6379}:6379"
     volumes:
       - ./.volumes/redis/data:/data
-    command: "redis-server --requirepass ${REDIS_PASSWORD:-secret}"
+    command: "redis-server --requirepass ${REDIS_PASSWORD:-redis}"
   rabbitmq:
     image: "rabbitmq:${RABBITMQ_TAG:-management}"
     container_name: rabbitmq
@@ -41,7 +41,7 @@ services:
       - "${RABBITMQ_MANAGEMENT_PORT:-15672}:15672"
     environment:
       RABBITMQ_DEFAULT_USER: "${RABBITMQ_USERNAME:-rabbitmq}"
-      RABBITMQ_DEFAULT_PASS: "${RABBITMQ_PASSWORD:-secret}"
+      RABBITMQ_DEFAULT_PASS: "${RABBITMQ_PASSWORD:-rabbitmq}"
     volumes:
       - ./.volumes/rabbitmq:/var/lib/rabbitmq
   zookeeper:
