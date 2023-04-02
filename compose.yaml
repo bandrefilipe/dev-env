@@ -80,7 +80,7 @@ services:
       KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:9092
       KAFKA_CLUSTERS_0_ZOOKEEPER: zookeeper:2181
   elasticsearch:
-    image: "elasticsearch:${ELASTICSEARCH_TAG:-8.6.0}"
+    image: "elasticsearch:${ELASTICSEARCH_TAG:-8.6.2}"
     container_name: elasticsearch
     restart: always
     ports:
@@ -89,7 +89,7 @@ services:
       - xpack.security.enabled=false
       - discovery.type=single-node
   kibana:
-    image: "kibana:${KIBANA_TAG:-8.6.0}"
+    image: "kibana:${KIBANA_TAG:-8.6.2}"
     container_name: kibana
     depends_on:
       - elasticsearch
